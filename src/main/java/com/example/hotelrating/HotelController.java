@@ -1,6 +1,7 @@
 package com.example.hotelrating;
 
 import org.bson.types.ObjectId;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,6 +13,7 @@ import java.util.List;
 @RequestMapping("/hotels")
 public class HotelController {
 
+    @Autowired
     private HotelRepository hotelRepository;
 
     @RequestMapping(value="/",method = RequestMethod.GET)
@@ -20,7 +22,7 @@ public class HotelController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Hotel getPetById(@PathVariable("id") ObjectId id) {
-        return hotelRepository.findBy_id(id);
+    public Hotel getPetById(@PathVariable("id") String id) {
+        return hotelRepository.findById(id).get();
     }
 }
